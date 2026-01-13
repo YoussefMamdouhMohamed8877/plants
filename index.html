@@ -1,0 +1,911 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="دليل شامل للنباتات المهددة بالانقراض، يهدف للتوعية وحماية التنوع البيولوجي. اكتشف النباتات، اختبر معلوماتك، وشارك في الحماية.">
+    <meta name="keywords" content="نباتات, انقراض, بيئة, تنوع بيولوجي, حماية الطبيعة, مصر, زراعة">
+    <meta name="author" content="يوسف ممدوح">
+    <meta property="og:title" content="النباتات المهددة بالانقراض - حماية التنوع البيولوجي">
+    <meta property="og:description" content="انضم إلينا في رحلة لحماية مستقبل كوكبنا. اكتشف، تعلم، وشارك.">
+    <meta property="og:image" content="URL_TO_YOUR_MAIN_IMAGE.jpg">
+    <meta property="og:url" content="YOUR_WEBSITE_URL">
+    <link rel="icon" type="image/png" href="path/to/favicon.png">
+    <title>النباتات المهددة بالانقراض - حماية التنوع البيولوجي</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- شريط التحميل -->
+    <div class="loading-bar" id="loadingBar">
+        <div class="loading-progress"></div>
+    </div>
+
+    <!-- زر العودة للأعلى -->
+    <button class="scroll-to-top" id="scrollToTop" aria-label="العودة إلى الأعلى">
+        <i class="fas fa-chevron-up"></i>
+    </button>
+
+    <!-- زر تبديل الوضع الليلي/النهاري -->
+    <button class="theme-toggle" id="themeToggle" aria-label="تبديل الوضع">
+        <i class="fas fa-moon"></i>
+    </button>
+
+    <!-- شريط التنقل العلوي -->
+    <nav class="top-nav">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <i class="fas fa-seedling"></i>
+                <span>النباتات المهددة</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#homePage" class="nav-link active">الرئيسية</a></li>
+                <li><a href="#about" class="nav-link">عن المبادرة</a></li>
+                <li><a href="#quiz" class="nav-link">اختبر معلوماتك</a></li>
+                <li><a href="#charts" class="nav-link">الإحصائيات</a></li>
+                <li><a href="#conservation" class="nav-link">جهود الحماية</a></li>
+                <li><a href="#gallery" class="nav-link">المعرض</a></li>
+                <li><a href="#contact" class="nav-link">اتصل بنا</a></li>
+            </ul>
+            <button class="nav-toggle" id="navToggle" aria-label="قائمة التنقل">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- رأس الصفحة -->
+    <header>
+        <div class="header-content">
+            <div class="header-text">
+                <h1>دليل النباتات المهددة بالانقراض</h1>
+                <p class="subtitle">المحافظة على التنوع البيولوجي من أجل مستقبل أفضل ومستدام للأجيال القادمة</p>
+            </div>
+            
+            <div class="header-stats">
+                <div class="stat-item">
+                    <span class="stat-number" id="totalPlants">0</span>
+                    <span class="stat-label">نبات مهدد</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number" id="criticalPlants">0</span>
+                    <span class="stat-label">حالة حرجة</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number" id="protectedPlants">0</span>
+                    <span class="stat-label">محمي</span>
+                </div>
+            </div>
+        </div>
+        <!-- قسم هل تعلم -->
+        <div class="did-you-know" id="didYouKnow">
+            <h4><i class="fas fa-lightbulb"></i> هل تعلم؟</h4>
+            <p id="funFact"></p>
+        </div>
+        
+        <!-- قسم البحث والتصفية -->
+        <div class="search-filter-container">
+            <div class="search-wrapper">
+                <i class="fas fa-search search-icon"></i>
+                <input type="text" class="search-box" id="searchBox" placeholder="ابحث عن نبات بالاسم أو الوصف...">
+                <button class="clear-search" id="clearSearch" aria-label="مسح البحث">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <div class="filter-section">
+                <div class="filter-buttons">
+                    <button class="filter-btn active" data-filter="all">
+                        <i class="fas fa-layer-group"></i>
+                        الكل
+                    </button>
+                    <button class="filter-btn" data-filter="flower">
+                        <i class="fas fa-spa"></i>
+                        زهور
+                    </button>
+                    <button class="filter-btn" data-filter="tree">
+                        <i class="fas fa-tree"></i>
+                        أشجار
+                    </button>
+                    <button class="filter-btn" data-filter="plant">
+                        <i class="fas fa-leaf"></i>
+                        نباتات أخرى
+                    </button>
+                </div>
+                
+                <div class="sort-options">
+                    <select id="sortSelect" class="sort-select">
+                        <option value="name">ترتيب أبجدي (أ-ي)</option>
+                        <option value="nameDesc">ترتيب أبجدي عكسي (ي-أ)</option>
+                        <option value="id">الأحدث أولاً</option>
+                        <option value="idDesc">الأقدم أولاً</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- المحتوى الرئيسي -->
+    <div class="container">
+        
+        <!-- الصفحة الرئيسية -->
+        <div id="homePage">
+            <div class="page-header">
+                <h2>النباتات المهددة بالانقراض</h2>
+                <div class="results-info" id="resultsInfo">
+                    عرض <span id="resultsCount">0</span> من أصل <span id="totalResults">0</span> نبات
+                </div>
+            </div>
+            
+            <div class="view-options">
+                <button class="view-btn active" data-view="grid" aria-label="عرض شبكي">
+                    <i class="fas fa-th"></i>
+                </button>
+                <button class="view-btn" data-view="list" aria-label="عرض قائمة">
+                    <i class="fas fa-list"></i>
+                </button>
+            </div>
+            
+            <div class="plants-container">
+                <div class="grid" id="plantsGrid"></div>
+                
+                <div class="no-results" id="noResults" style="display: none;">
+                    <i class="fas fa-search fa-3x"></i>
+                    <h3>لا توجد نتائج مطابقة للبحث</h3>
+                    <p>جرب استخدام كلمات بحث أخرى أو تصفية مختلفة</p>
+                    <button class="reset-filters" id="resetFilters">
+                        <i class="fas fa-redo"></i>
+                        إعادة تعيين الفلاتر
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- صفحة التفاصيل -->
+        <div class="detail-page" id="detailPage">
+            <div class="detail-nav">
+                <button class="back-button" onclick="showHomePage()">
+                    <i class="fas fa-arrow-right"></i>
+                    العودة للرئيسية
+                </button>
+                <div class="detail-actions">
+                    <button class="action-btn" id="sharePlant" aria-label="مشاركة">
+                        <i class="fas fa-share-alt"></i>
+                    </button>
+                    <button class="action-btn" id="favoritePlant" aria-label="إضافة إلى المفضلة">
+                        <i class="far fa-heart"></i>
+                    </button>
+                    <button class="action-btn" id="printPlant" aria-label="طباعة">
+                        <i class="fas fa-print"></i>
+                    </button>
+                    <button class="action-btn" id="downloadPDF" aria-label="تحميل PDF">
+                        <i class="fas fa-file-pdf"></i>
+                    </button>
+                </div>
+            </div>
+            <div id="detailContent"></div>
+        </div>
+
+        <!-- صفحة المقارنة -->
+        <div class="comparison-page" id="comparisonPage">
+            <div class="detail-nav">
+                <button class="back-button" onclick="hideComparison()">
+                    <i class="fas fa-arrow-right"></i>
+                    العودة
+                </button>
+            </div>
+            <div class="info-section">
+                <h2 style="text-align: center; margin-bottom: 2rem;">مقارنة النباتات</h2>
+                <div class="comparison-grid" id="comparisonGrid"></div>
+            </div>
+        </div>
+
+        <!-- قسم عن المبادرة -->
+        <section id="about" class="info-section">
+            <div class="section-header">
+                <h2>عن مبادرة حماية النباتات</h2>
+                <p>جهودنا للحفاظ على التنوع البيولوجي</p>
+            </div>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>تعتبر النباتات المهددة بالانقراض جزءاً أساسياً من نظامنا البيئي، وتساهم في التوازن البيئي والتنوع البيولوجي. تهدف مبادرة حماية النباتات إلى:</p>
+                    <ul>
+                        <li>توثيق النباتات المهددة بالانقراض وتصنيفها علمياً</li>
+                        <li>رفع الوعي المجتمعي بأهمية الحفاظ على التنوع النباتي</li>
+                        <li>دعم جهود الحماية والمحافظة على البيئة الطبيعية</li>
+                        <li>تشجيع البحث العلمي والدراسات في هذا المجال الحيوي</li>
+                    </ul>
+                </div>
+                <div class="about-image">
+                    <img src="https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=400" alt="جهود حماية النباتات">
+                </div>
+            </div>
+        </section>
+
+        <!-- قسم الاختبار -->
+        <section id="quiz" class="info-section quiz-container">
+            <div class="section-header">
+                <h2>اختبر معلوماتك عن النباتات المهددة</h2>
+                <p>تحدى نفسك واكتشف مدى معرفتك بالنباتات المهددة بالانقراض</p>
+            </div>
+            <div class="quiz-question" id="quizQuestion"></div>
+            <div class="quiz-options" id="quizOptions"></div>
+            <div class="quiz-result" id="quizResult"></div>
+            <button class="reset-filters" id="nextQuestion" style="margin-top: 1.5rem;">
+                <i class="fas fa-arrow-left"></i>
+                السؤال التالي
+            </button>
+        </section>
+
+        <!-- قسم الإحصائيات -->
+        <section id="charts" class="info-section">
+            <div class="section-header">
+                <h2>إحصائيات النباتات المهددة</h2>
+                <p>بيانات ورسوم بيانية توضيحية</p>
+            </div>
+            <div class="charts-grid">
+                <div class="chart-container">
+                    <h3>توزيع النباتات حسب النوع</h3>
+                    <canvas id="plantsChart"></canvas>
+                </div>
+                <div class="chart-container">
+                    <h3>أكثر التهديدات شيوعاً</h3>
+                    <canvas id="threatsChart"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <!-- قسم جهود الحماية -->
+        <section id="conservation" class="info-section">
+            <div class="section-header">
+                <h2>جهود الحماية</h2>
+                <p>كيف نساهم في حماية النباتات المهددة</p>
+            </div>
+            <div class="conservation-cards">
+                <div class="conservation-card">
+                    <i class="fas fa-shield-alt"></i>
+                    <h3>المحميات الطبيعية</h3>
+                    <p>إنشاء مناطق محمية للحفاظ على الموائل الطبيعية للنباتات النادرة</p>
+                </div>
+                <div class="conservation-card">
+                    <i class="fas fa-seedling"></i>
+                    <h3>الاستزراع</h3>
+                    <p>زراعة النباتات المهددة في بيئات خاضعة للرقابة وإعادة إدخالها إلى موائلها</p>
+                </div>
+                <div class="conservation-card">
+                    <i class="fas fa-book"></i>
+                    <h3>التوعية والتعليم</h3>
+                    <p>برامج توعوية للمجتمعات المحلية حول أهمية الحفاظ على التنوع النباتي</p>
+                </div>
+                <div class="conservation-card">
+                    <i class="fas fa-search"></i>
+                    <h3>المراقبة والبحث</h3>
+                    <p>مراقبة النباتات المهددة وإجراء أبحاث لتطوير استراتيجيات حماية أفضل</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- قسم التبني والتبرع -->
+        <section id="adoption" class="info-section">
+            <div class="section-header">
+                <h2>تبنَّ نباتاً وساهم في حمايته</h2>
+                <p>كن جزءاً من الحل وساعد في إنقاذ النباتات المهددة</p>
+            </div>
+            <div class="adoption-intro">
+                <p>من خلال برنامج التبني الرمزي، يمكنك دعم جهود حماية نبات معين والحصول على شهادة تبني رقمية. مساهمتك تساعد في:</p>
+                <div class="adoption-benefits">
+                    <div class="benefit-item">
+                        <i class="fas fa-seedling"></i>
+                        <span>زراعة وإكثار النباتات</span>
+                    </div>
+                    <div class="benefit-item">
+                        <i class="fas fa-shield-alt"></i>
+                        <span>حماية الموائل الطبيعية</span>
+                    </div>
+                    <div class="benefit-item">
+                        <i class="fas fa-microscope"></i>
+                        <span>دعم الأبحاث العلمية</span>
+                    </div>
+                    <div class="benefit-item">
+                        <i class="fas fa-users"></i>
+                        <span>برامج التوعية المجتمعية</span>
+                    </div>
+                </div>
+            </div>
+            <div class="adoption-grid" id="adoptionGrid"></div>
+        </section>
+
+        <!-- قسم صانع البوستر -->
+        <section id="poster-maker" class="info-section">
+            <div class="section-header">
+                <h2>صانع البوستر التوعوي</h2>
+                <p>صمم بوستراً احترافياً لنشر الوعي بأهمية حماية النباتات</p>
+            </div>
+            <div class="poster-maker-container">
+                <div class="poster-controls">
+                    <h3><i class="fas fa-palette"></i> خيارات التصميم</h3>
+                    <div class="control-group">
+                        <label>اختر نباتاً:</label>
+                        <select id="posterPlantSelect" class="poster-select"></select>
+                    </div>
+                    <div class="control-group">
+                        <label>القالب:</label>
+                        <div class="template-options">
+                            <button class="template-btn active" data-template="modern">عصري</button>
+                            <button class="template-btn" data-template="classic">كلاسيكي</button>
+                            <button class="template-btn" data-template="minimal">بسيط</button>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label>اللون الأساسي:</label>
+                        <input type="color" id="posterColor" value="#6577ff">
+                    </div>
+                    <div class="control-group">
+                        <label>العنوان:</label>
+                        <input type="text" id="posterTitle" placeholder="احم النباتات المهددة" class="poster-input">
+                    </div>
+                    <div class="control-group">
+                        <label>النص:</label>
+                        <textarea id="posterText" rows="3" class="poster-input" placeholder="معاً نحمي مستقبل كوكبنا"></textarea>
+                    </div>
+                    <div class="poster-actions">
+                        <button class="poster-action-btn" id="downloadPosterBtn">
+                            <i class="fas fa-download"></i>
+                            تحميل البوستر
+                        </button>
+                        <button class="poster-action-btn" id="sharePosterBtn">
+                            <i class="fas fa-share-alt"></i>
+                            مشاركة
+                        </button>
+                    </div>
+                </div>
+                <div class="poster-preview">
+                    <h3><i class="fas fa-eye"></i> معاينة</h3>
+                    <div class="poster-canvas" id="posterCanvas">
+                        <div class="poster-content">
+                            <div class="poster-image-container">
+                                <img id="posterImage" src="" alt="صورة النبات">
+                            </div>
+                            <div class="poster-text-container">
+                                <h2 id="posterTitleDisplay">احم النباتات المهددة</h2>
+                                <p id="posterTextDisplay">معاً نحمي مستقبل كوكبنا</p>
+                                <div class="poster-footer">
+                                    <span>دليل النباتات المهددة بالانقراض</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- قسم حاسبة البصمة الكربونية -->
+        <section id="carbon-calculator" class="info-section">
+            <div class="section-header">
+                <h2>حاسبة البصمة الكربونية</h2>
+                <p>احسب تأثيرك على البيئة واحصل على نصائح لتقليله</p>
+            </div>
+            <div class="calculator-container">
+                <div class="calculator-form">
+                    <div class="calc-section">
+                        <h3><i class="fas fa-car"></i> النقل</h3>
+                        <div class="calc-input-group">
+                            <label>كم كيلومتر تقطع بالسيارة شهرياً؟</label>
+                            <input type="number" id="carKm" min="0" value="500" class="calc-input">
+                            <span class="calc-unit">كم</span>
+                        </div>
+                        <div class="calc-input-group">
+                            <label>هل تستخدم وسائل النقل العام؟</label>
+                            <select id="publicTransport" class="calc-select">
+                                <option value="0">لا</option>
+                                <option value="1">أحياناً</option>
+                                <option value="2">دائماً</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="calc-section">
+                        <h3><i class="fas fa-bolt"></i> الطاقة</h3>
+                        <div class="calc-input-group">
+                            <label>متوسط فاتورة الكهرباء الشهرية (جنيه):</label>
+                            <input type="number" id="electricity" min="0" value="300" class="calc-input">
+                            <span class="calc-unit">جنيه</span>
+                        </div>
+                        <div class="calc-input-group">
+                            <label>هل تستخدم مصادر طاقة متجددة؟</label>
+                            <select id="renewable" class="calc-select">
+                                <option value="0">لا</option>
+                                <option value="1">جزئياً</option>
+                                <option value="2">نعم</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="calc-section">
+                        <h3><i class="fas fa-utensils"></i> الطعام</h3>
+                        <div class="calc-input-group">
+                            <label>كم مرة تأكل اللحوم أسبوعياً؟</label>
+                            <input type="number" id="meatMeals" min="0" max="21" value="7" class="calc-input">
+                            <span class="calc-unit">مرة</span>
+                        </div>
+                        <div class="calc-input-group">
+                            <label>هل تهدر الطعام؟</label>
+                            <select id="foodWaste" class="calc-select">
+                                <option value="0">نادراً</option>
+                                <option value="1">أحياناً</option>
+                                <option value="2">كثيراً</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <button class="calculate-btn" id="calculateBtn">
+                        <i class="fas fa-calculator"></i>
+                        احسب البصمة الكربونية
+                    </button>
+                </div>
+                
+                <div class="calculator-result" id="calculatorResult" style="display: none;">
+                    <div class="result-score">
+                        <div class="score-circle">
+                            <svg viewBox="0 0 200 200">
+                                <circle cx="100" cy="100" r="90" fill="none" stroke="rgba(101, 119, 255, 0.1)" stroke-width="20"/>
+                                <circle id="scoreCircle" cx="100" cy="100" r="90" fill="none" stroke="#6577ff" stroke-width="20" 
+                                        stroke-dasharray="565" stroke-dashoffset="565" transform="rotate(-90 100 100)"/>
+                            </svg>
+                            <div class="score-text">
+                                <span class="score-number" id="carbonScore">0</span>
+                                <span class="score-label">طن CO₂/سنة</span>
+                            </div>
+                        </div>
+                        <p id="scoreMessage" class="score-message"></p>
+                    </div>
+                    
+                    <div class="result-breakdown">
+                        <h4>التفصيل:</h4>
+                        <div class="breakdown-item">
+                            <span>النقل</span>
+                            <div class="breakdown-bar">
+                                <div class="breakdown-fill" id="transportBar"></div>
+                            </div>
+                            <span id="transportValue">0</span>
+                        </div>
+                        <div class="breakdown-item">
+                            <span>الطاقة</span>
+                            <div class="breakdown-bar">
+                                <div class="breakdown-fill" id="energyBar"></div>
+                            </div>
+                            <span id="energyValue">0</span>
+                        </div>
+                        <div class="breakdown-item">
+                            <span>الطعام</span>
+                            <div class="breakdown-bar">
+                                <div class="breakdown-fill" id="foodBar"></div>
+                            </div>
+                            <span id="foodValue">0</span>
+                        </div>
+                    </div>
+                    
+                    <div class="result-tips">
+                        <h4><i class="fas fa-lightbulb"></i> نصائح لتقليل البصمة الكربونية:</h4>
+                        <ul id="tipsList"></ul>
+                    </div>
+                    
+                    <div class="tree-equivalent">
+                        <i class="fas fa-tree"></i>
+                        <p>لتعويض بصمتك الكربونية، تحتاج لزراعة <strong id="treesNeeded">0</strong> شجرة سنوياً</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- قسم الخريطة التفاعلية -->
+        <section id="map" class="info-section">
+            <div class="section-header">
+                <h2>خريطة النباتات المهددة حول العالم</h2>
+                <p>اكتشف مواقع النباتات المهددة بالانقراض على خريطة تفاعلية</p>
+            </div>
+            <div class="map-container">
+                <div id="worldMap" style="width: 100%; height: 500px; background: rgba(101, 119, 255, 0.1); border-radius: 15px; display: flex; align-items: center; justify-content: center;">
+                    <div style="text-align: center; padding: 2rem;">
+                        <i class="fas fa-map-marked-alt" style="font-size: 4rem; color: var(--primary-color); margin-bottom: 1rem;"></i>
+                        <h3 style="color: var(--accent-color); margin-bottom: 1rem;">خريطة تفاعلية للنباتات</h3>
+                        <div id="mapStats" class="map-stats-grid"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- قسم مكتبة الوسائط -->
+        <section id="gallery" class="info-section">
+            <div class="section-header">
+                <h2>مكتبة الصور والفيديوهات</h2>
+                <p>استكشف معرض الصور عالي الجودة للنباتات المهددة</p>
+            </div>
+            <div class="gallery-tabs">
+                <button class="gallery-tab active" data-tab="images">
+                    <i class="fas fa-images"></i> الصور
+                </button>
+                <button class="gallery-tab" data-tab="videos">
+                    <i class="fas fa-video"></i> الفيديوهات
+                </button>
+            </div>
+            <div id="galleryContent" class="gallery-grid"></div>
+        </section>
+
+        <!-- قسم لوحة المتصدرين -->
+        <section id="leaderboard" class="info-section">
+            <div class="section-header">
+                <h2>لوحة المتصدرين</h2>
+                <p>أفضل المشاركين في اختبارات النباتات</p>
+            </div>
+            <div class="leaderboard-container">
+                <div class="leaderboard-filters">
+                    <button class="leaderboard-filter active" data-period="today">اليوم</button>
+                    <button class="leaderboard-filter" data-period="week">هذا الأسبوع</button>
+                    <button class="leaderboard-filter" data-period="month">هذا الشهر</button>
+                    <button class="leaderboard-filter" data-period="alltime">الأفضل على الإطلاق</button>
+                </div>
+                <div id="leaderboardList" class="leaderboard-list"></div>
+            </div>
+        </section>
+
+        <!-- قسم الملف الشخصي -->
+        <section id="profile" class="info-section" style="display: none;">
+            <div class="section-header">
+                <h2>ملفي الشخصي</h2>
+                <p>تتبع تقدمك وإنجازاتك</p>
+            </div>
+            <div class="profile-container">
+                <div class="profile-header">
+                    <div class="profile-avatar">
+                        <i class="fas fa-user-circle"></i>
+                    </div>
+                    <div class="profile-info">
+                        <h3 id="profileName">زائر</h3>
+                        <p id="profileLevel">المستوى: مبتدئ</p>
+                    </div>
+                    <button class="profile-edit-btn" id="editProfileBtn">
+                        <i class="fas fa-edit"></i> تعديل الملف
+                    </button>
+                </div>
+                <div class="profile-stats">
+                    <div class="profile-stat-card">
+                        <i class="fas fa-trophy"></i>
+                        <h4 id="profileScore">0</h4>
+                        <p>نقاط الاختبارات</p>
+                    </div>
+                    <div class="profile-stat-card">
+                        <i class="fas fa-heart"></i>
+                        <h4 id="profileFavorites">0</h4>
+                        <p>نباتات مفضلة</p>
+                    </div>
+                    <div class="profile-stat-card">
+                        <i class="fas fa-check-circle"></i>
+                        <h4 id="profileQuizzes">0</h4>
+                        <p>اختبارات مكتملة</p>
+                    </div>
+                    <div class="profile-stat-card">
+                        <i class="fas fa-medal"></i>
+                        <h4 id="profileBadges">0</h4>
+                        <p>شارات محققة</p>
+                    </div>
+                </div>
+                <div class="profile-sections">
+                    <div class="profile-section">
+                        <h3><i class="fas fa-medal"></i> الشارات والإنجازات</h3>
+                        <div id="badgesContainer" class="badges-grid"></div>
+                    </div>
+                    <div class="profile-section">
+                        <h3><i class="fas fa-heart"></i> النباتات المفضلة</h3>
+                        <div id="favoritesContainer" class="favorites-grid"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- قسم اتصل بنا -->
+        <section id="contact" class="info-section">
+            <div class="section-header">
+                <h2>اتصل بنا</h2>
+                <p>نرحب بمساهماتكم واستفساراتكم</p>
+            </div>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <div>
+                            <h4>البريد الإلكتروني</h4>
+                            <p>youssefmamdouhh58@gmail.com</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <div>
+                            <h4>الهاتف</h4>
+                            <p>+201100169002</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div>
+                            <h4>العنوان</h4>
+                            <p>القاهرة / جمهورية مصر العربية</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <h3>أرسل رسالة</h3>
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <input type="text" id="contactName" name="name" placeholder="اسمك الكامل" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" id="contactEmail" name="email" placeholder="بريدك الإلكتروني" required>
+                        </div>
+                        <div class="form-group">
+                            <textarea id="contactMessage" name="message" placeholder="رسالتك" rows="5" required></textarea>
+                        </div>
+                        <button type="submit" class="submit-btn">
+                            <i class="fas fa-paper-plane"></i>
+                            إرسال الرسالة
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </section>
+        
+    </div>
+    <!-- نهاية المحتوى الرئيسي -->
+
+    <!-- شريط المقارنة -->
+    <div class="compare-section" id="compareSection">
+        <div class="compare-info">
+            <span class="compare-count" id="compareCount">تم اختيار 0 نبات للمقارنة</span>
+        </div>
+        <div class="compare-actions">
+            <button class="compare-btn" id="compareBtn">
+                <i class="fas fa-balance-scale"></i>
+                مقارنة الآن
+            </button>
+            <button class="clear-compare-btn" id="clearCompareBtn">
+                <i class="fas fa-times"></i>
+                مسح الكل
+            </button>
+        </div>
+    </div>
+
+    <!-- Lightbox للصور -->
+    <div class="lightbox" id="lightbox">
+        <span class="lightbox-close" id="lightboxClose">&times;</span>
+        <img src="" alt="صورة كبيرة" id="lightboxImg">
+    </div>
+    
+    <!-- الفوتر -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <div class="footer-logo">
+                    <i class="fas fa-seedling"></i>
+                    <h3>دليل النباتات المهددة</h3>
+                </div>
+                <p>نسعى للحفاظ على النباتات المهددة بالانقراض للأجيال القادمة من خلال التوثيق والتوعية وجهود الحماية.</p>
+            </div>
+            
+            <div class="footer-section">
+                <h4>روابط سريعة</h4>
+                <ul>
+                    <li><a href="#homePage">الرئيسية</a></li>
+                    <li><a href="#about">عن المبادرة</a></li>
+                    <li><a href="#quiz">اختبر معلوماتك</a></li>
+                    <li><a href="#charts">الإحصائيات</a></li>
+                    <li><a href="#conservation">جهود الحماية</a></li>
+                    <li><a href="#contact">اتصل بنا</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h4>الأنواع</h4>
+                <ul>
+                    <li><a href="#" data-filter="flower">الزهور المهددة</a></li>
+                    <li><a href="#" data-filter="tree">الأشجار المهددة</a></li>
+                    <li><a href="#" data-filter="plant">نباتات أخرى مهددة</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h4>تابعنا</h4>
+                <div class="social-links">
+                    <a href="https://www.facebook.com/share/1AJtjaYN6w/" aria-label="فيسبوك" target="_blank" rel="noopener noreferrer">
+                        <i class="fab fa-facebook"></i>
+                    </a>
+                    <a href="https://x.com/JOO_MAMDOUH7788?t=Awl8hcD0lLNfS4enxReB0A&s=09" aria-label="تويتر" target="_blank" rel="noopener noreferrer">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="https://www.instagram.com/youss_efmamdouh?igsh=MWpibHgyaHFjbXdlNA==" aria-label="إنستغرام" target="_blank" rel="noopener noreferrer">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="#" aria-label="يوتيوب" target="_blank" rel="noopener noreferrer">
+                        <i class="fab fa-youtube"></i>
+                    </a>
+                </div>
+                <div class="newsletter">
+                    <h5>اشترك في نشرتنا</h5>
+                    <form class="newsletter-form" id="newsletterForm">
+                        <input type="email" placeholder="بريدك الإلكتروني" required>
+                        <button type="submit">اشتراك</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2025 دليل النباتات المهددة بالانقراض. جميع الحقوق محفوظة.</p>
+            <div class="footer-links">
+                <a href="#">سياسة الخصوصية</a>
+                <a href="#">شروط الاستخدام</a>
+                <a href="#">خريطة الموقع</a>
+            </div>
+        </div>
+    </footer>
+<!-- أضف هذه الأقسام قبل قسم "اتصل بنا" في index.html -->
+
+<!-- قسم المدونة -->
+<section id="blog" class="info-section">
+    <div class="section-header">
+        <h2>المدونة والمقالات</h2>
+        <p>آخر الأخبار والمقالات حول النباتات المهددة</p>
+    </div>
+    <div id="blogGrid" class="blog-grid"></div>
+</section>
+
+<!-- قسم التقويم -->
+<section id="calendar" class="info-section">
+    <div class="section-header">
+        <h2>تقويم الفعاليات البيئية</h2>
+        <p>أهم المناسبات والأيام العالمية للبيئة</p>
+    </div>
+    <div class="calendar-container">
+        <div class="calendar-header">
+            <button class="calendar-nav-btn" id="prevMonth">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+            <h3 id="calendarTitle"></h3>
+            <button class="calendar-nav-btn" id="nextMonth">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+        </div>
+        <div class="calendar-grid" id="calendarGrid"></div>
+        <div class="events-list" id="eventsList"></div>
+    </div>
+</section>
+
+<!-- قسم لوحة المعلومات -->
+<section id="dashboard" class="info-section">
+    <div class="section-header">
+        <h2>لوحة المعلومات</h2>
+        <p>إحصائيات وبيانات شاملة</p>
+    </div>
+    <div class="dashboard-stats">
+        <div class="dashboard-card">
+            <i class="fas fa-seedling"></i>
+            <h3>إجمالي النباتات</h3>
+            <p class="dashboard-number" id="dashTotalPlants">60</p>
+        </div>
+        <div class="dashboard-card">
+            <i class="fas fa-exclamation-triangle"></i>
+            <h3>حالة حرجة</h3>
+            <p class="dashboard-number" id="dashCritical">24</p>
+        </div>
+        <div class="dashboard-card">
+            <i class="fas fa-shield-alt"></i>
+            <h3>محمية</h3>
+            <p class="dashboard-number" id="dashProtected">15</p>
+        </div>
+        <div class="dashboard-card">
+            <i class="fas fa-chart-line"></i>
+            <h3>نسبة النمو</h3>
+            <p class="dashboard-number">+12%</p>
+        </div>
+    </div>
+    <div class="timeline-chart-container">
+        <h3>الخط الزمني لاكتشاف النباتات</h3>
+        <canvas id="timelineChart"></canvas>
+    </div>
+</section>
+
+<!-- قسم الماسح الذكي بالذكاء الاصطناعي -->
+<section id="ai-scanner" class="info-section">
+    <div class="section-header">
+        <h2>الماسح الذكي للنباتات</h2>
+        <p>استخدم الذكاء الاصطناعي للتعرف على النباتات من الصور</p>
+    </div>
+    <div class="scanner-container">
+        <div class="scanner-upload" id="scannerUploadArea">
+            <i class="fas fa-camera fa-3x"></i>
+            <h3>التقط أو ارفع صورة نبات</h3>
+            <p>سنحاول التعرف عليه باستخدام الذكاء الاصطناعي</p>
+            <input type="file" id="plantImageInput" accept="image/*" style="display: none;">
+            <div class="scanner-buttons">
+                <button class="scanner-btn" id="uploadImageBtn">
+                    <i class="fas fa-upload"></i>
+                    رفع صورة
+                </button>
+                <button class="scanner-btn" id="cameraBtn">
+                    <i class="fas fa-camera"></i>
+                    التقاط صورة
+                </button>
+            </div>
+        </div>
+        
+        <div class="scanner-result" id="scannerResult" style="display: none;">
+            <div class="scanned-image-container">
+                <img id="scannedImage" src="" alt="صورة النبات">
+            </div>
+            
+            <div class="scanning-animation" id="scanningAnimation">
+                <div class="scanner-line"></div>
+                <p>جاري التحليل...</p>
+            </div>
+            
+            <div class="scan-results" id="scanResults" style="display: none;">
+                <h3>نتائج التعرف:</h3>
+                <div class="result-item">
+                    <strong>اسم النبات:</strong>
+                    <span id="plantNameResult"></span>
+                </div>
+                <div class="result-item">
+                    <strong>نسبة الدقة:</strong>
+                    <div class="confidence-bar">
+                        <div class="confidence-fill" id="confidenceBar"></div>
+                    </div>
+                    <span id="confidencePercent"></span>
+                </div>
+                <div class="result-item">
+                    <strong>النوع:</strong>
+                    <span id="plantType"></span>
+                </div>
+                <div class="result-item">
+                    <strong>الحالة:</strong>
+                    <span id="plantStatus" class="status-critical">مهدد بالانقراض</span>
+                </div>
+                <div class="result-description">
+                    <p id="scanDescription"></p>
+                </div>
+                <div class="scan-actions">
+                    <button class="scan-action-btn" id="viewScannedPlant">
+                        <i class="fas fa-eye"></i>
+                        عرض التفاصيل
+                    </button>
+                    <button class="scan-action-btn" id="scanAgainBtn">
+                        <i class="fas fa-redo"></i>
+                        مسح مرة أخرى
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- نافذة الإشعارات -->
+<div class="notifications-dropdown" id="notificationsDropdown" style="display: none;">
+    <div class="notifications-header">
+        <h3>الإشعارات</h3>
+        <button class="clear-all-notifications" id="clearAllNotifications">
+            مسح الكل
+        </button>
+    </div>
+    <div class="notifications-list" id="notificationsList"></div>
+</div>
+
+    <!-- المكتبات الخارجية -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- ملف JavaScript الرئيسي -->
+    <script src="script.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+</body>
+</html>
